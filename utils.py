@@ -47,26 +47,7 @@ def get_padding_2d(kernel_size, dilation=(1, 1)):
     return (int((kernel_size[0]*dilation[0] - dilation[0])/2), int((kernel_size[1]*dilation[1] - dilation[1])/2))
 
 
-class LearnablePowerLawCompression(nn.Module):
-    def __init__(self, original_size):
-        super(LearnablePowerLawCompression, self).__init__()
-        self.original_size = original_size
-        self.scale = nn.Parameter(torch.ones(original_size))
-        self.power = nn.Parameter(torch.ones(original_size))
 
-    def forward(self, x):
-        # 使用幂律压缩进行参数压缩
-        compressed_weights = torch.pow(torch.abs(x), self.power) * torch.sign(x) * self.scale
-        return compressed_weights
-class LearnablePowerLawDecompression(nn.Module):
-    def __init__(self, original_size):
-        super(LearnablePowerLawDecompression, self).__init__()
-        self.original_size = original_size
-
-    def forward(self, compressed_weights, power, scale):
-        # 使用逆操作进行解压缩
-        decompressed_weights = torch.pow(torch.abs(compressed_weights) / scale, 1.0 / power) * torch.sign(compressed_weights)
-        return decompressed_weights
 def ri_stft(y, n_fft, hop_size, win_size, compress_factor=1.0, center=True):
     hann_window = torch.hann_window(win_size).to(y.device)
     stft_spec = torch.stft(y, n_fft, hop_length=hop_size, win_length=win_size, window=hann_window,
@@ -214,12 +195,6 @@ def pcs_uncompress(real, imag):
     real_compress = mag * torch.cos(phase)
     imag_compress = mag * torch.sin(phase)
     return real_compress, imag_compress
-def das(dad, son,step,total,alpha):
-    if step <= total//2 and son<dad:
-        x = alpha * dad + (1 - alpha) * son
-    elif step <= total and son>dad:
-        x = alpha * son + (1 - alpha) * dad
-    return x
 def lsd_loss(clean, estimate):
     alpha = 0.5
     lsd_m =  torch.log(torch.mean(torch.norm(clean.pow(alpha)-estimate.pow(alpha), dim=-1, keepdim=True)**2+1e-8))
@@ -231,7 +206,7 @@ def snr_loss(clean, estimate):
 #     y_hat, y = map(model, [est, clean])
 #     return SamplesLoss(y_hat, y)
 # class PerceptualLoss(nn.Module):
-#     def __init__(self, model_type='wav2vec', PRETRAINED_MODEL_PATH = '/home/xyj/exp/cmgan/src/pt-models/wav2vec_big_960h.pt'):
+#     def __init__(self, model_type='wav2vec', PRETRAINED_MODEL_PATH = '/home/exp/cmgan/src/pt-models/wav2vec_big_960h.pt'):
 #         super().__init__()
 #         self.model_type = model_type
 #         self.wass_dist = SamplesLoss()
@@ -262,54 +237,3 @@ def get_augmented_input(x, t):
             padded.append(x[:, idx:idx + 1, :])  # 维度应保持一致
 
     return torch.cat(padded, dim=1)  # 在时间维度上拼接
-
-class PP_BiRNN(nn.Module):
-    def __init__(self, input_dim, hidden_dim, num_layers, dropout, output_dim=2):
-        super(PP_BiRNN, self).__init__()
-        self.lstm_layers = nn.ModuleList()
-
-        # LSTM layers
-        self.lstm_layers.append(nn.LSTM(input_dim, hidden_dim, num_layers=1,
-                                        bidirectional=True, batch_first=True))
-
-        for _ in range(1, num_layers):
-            self.lstm_layers.append(nn.LSTM(hidden_dim * 2, hidden_dim, num_layers=1,
-                                            bidirectional=True, batch_first=True))
-
-        # Dropout layers
-        self.tanh_acts = nn.ModuleList([nn.Tanh() for _ in range(num_layers)])
-        self.dropouts = nn.ModuleList([nn.Dropout(dropout) for _ in range(num_layers)])
-
-        # Fully connected layer
-        self.fc = nn.Linear(hidden_dim * 2, output_dim)
-        self.output = nn.Linear(output_dim, input_dim)
-
-    def forward(self, enhanced, noisy):
-        b, c, t, f = enhanced.shape
-        # print(b,c,t,f)
-        # 选择中间的时间帧 (t=321)
-        time_index = t  # 假设对称选择
-        pad_length =2
-        # # 增强与噪声的时间框架
-        # enhanced_aug = get_augmented_input(enhanced, time_index)
-        # noisy_aug = get_augmented_input(noisy, time_index)
-
-        # 拼接
-        padded_enhanced = F.pad(enhanced, [0, 0, pad_length, pad_length])
-        padded_noisy = F.pad(noisy, [0,0, pad_length, pad_length])
-        x = torch.cat([padded_enhanced, padded_noisy], dim=-1)
-        # 重塑输入
-        x = x.view(b * c, -1, x.size(-1))
-        # print(f'input.shape: {x.shape}')
-        for lstm, tanh, dropout in zip(self.lstm_layers, self.tanh_acts, self.dropouts):
-            x, _ = lstm(x)
-            x = dropout(tanh(x))
-
-
-        x = self.fc(x)
-        x = self.output(x)
-        x = torch.sigmoid(x)
-        x = x[:, pad_length:t+pad_length, :f]
-        x =x.view(b,c,t,f)
-        # print(f'output.shape: {x.shape}')
-        return x
