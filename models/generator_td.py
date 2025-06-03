@@ -1,7 +1,7 @@
 import torch
 import torch.fft
 import torch.nn as nn
-from util import *
+from utils import *
 
 # from .conv128 import PreNorm, LocConformerBlock
 from .conformer import (LocConformerBlock,TransformerBlock)
@@ -238,9 +238,11 @@ class DenseEncoder(nn.Module):
             nn.InstanceNorm2d(channels, affine=True),
             nn.PReLU(channels)
         )
+        # self.mtra1 = MambaTRA(channels)
     def forward(self, x):#
         x = self.conv_1(x)
         x = self.dilated_dense(x)
+        # self.mtra1(x)
         x = self.conv_2(x)
 
         return x
@@ -407,6 +409,7 @@ class ComplexDecoder(nn.Module):
         self.prelu = nn.PReLU(num_channel)
         self.norm = nn.InstanceNorm2d(num_channel, affine=True)
         self.conv = nn.Conv2d(num_channel, 2, (1, 2))
+        # self.BiasNorm = BiasNorm(2)
     def forward(self, x):
         # x = self.kan_conv(x)
         x = self.dense_block(x)
@@ -438,12 +441,13 @@ class PhaseDecoder(nn.Module):
         super(PhaseDecoder, self).__init__()
         # self.phase_conv = SPConvTranspose2d(num_channel, num_channel, (1, 3), 2)
         self.dense_block = DilatedDenseNet(depth=4, in_channels=num_channel)
-        # self.phase_conv = SPConvTranspose2d(num_channel, num_channel, (1, 3), 2)
+        self.phase_conv = SPConvTranspose2d(num_channel, num_channel, (1, 3), 2)
         # self.kan_conv = ConvKAN(in_channels=num_channel,out_channels=num_channel,groups=16,padding=1)
-        self.phase_conv = nn.Sequential(SPConvTranspose2d(num_channel, num_channel, (1, 3), 2),
-                                      nn.InstanceNorm2d(num_channel, affine=True),
-                                      nn.PReLU(num_channel),
-                                         )
+        # self.phase_conv = nn.Sequential(SPConvTranspose2d(num_channel, num_channel, (1, 3), 2),
+        #                                 nn.PReLU(num_channel),
+        #                                 nn.InstanceNorm2d(num_channel, affine=True),
+        #
+        #                                 )
         self.phase_conv_r = nn.Conv2d(num_channel, out_channel, (1, 2))
         self.phase_conv_i = nn.Conv2d(num_channel, out_channel, (1, 2))
 
