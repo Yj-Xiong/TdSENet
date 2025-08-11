@@ -282,7 +282,7 @@ def noisy_evaluation(noisy_dir, clean_dir, saved_dir):
     print(f'stoi: {metrics_avg[7]:.4f} ± {metrics_std[7]:.4f}')
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--model_path", type=str, default='/home/xyj/Experience/PrimeK-Net-main/g_best',
+parser.add_argument("--model_path", type=str, default='/home/xyj/Experiment/PrimeK-Net-main/g_best',
                     help="the path where the model is saved")
 
 parser.add_argument("--test_dir", type=str, default='/home/dataset/Uighur-Chinese-English/Chinese/test/babble/',
@@ -315,7 +315,7 @@ if __name__ == '__main__':
                saved_dir=output_dir)
 
 # # parser = argparse.ArgumentParser()
-# # parser.add_argument("--model_path", type=str, default='/home/xyj/Experience/CMG-v1/src/ckpt/tdsenet_0.01cp/epoch58-pesq:3.568-loss_sum:0.5103:-g:0.505-d:0.004',
+# # parser.add_argument("--model_path", type=str, default='/home/xyj/Experiment/CMG-v1/src/ckpt/tdsenet_0.01cp/epoch58-pesq:3.568-loss_sum:0.5103:-g:0.505-d:0.004',
 # #                     help="the path where the model is saved")
 # #
 # # parser.add_argument("--test_dir", type=str, default='/home/dataset/Uighur-Chinese-English/Chinese/test/babble/',
