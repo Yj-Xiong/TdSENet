@@ -6,7 +6,7 @@ Audio samples are from THCHS+DNS dataset (mixed with THCHS-30 dataset and DNS-Ch
 ## Pre-requisites
 1. Python >= 3.9.
 2. Clone this repository.
-3. Install python requirements. Please refer [packages_for_environment.txt](https://github.com/Yj-Xiong/AnonymousRepo/blob/main/requirements.txt).
+3. Install python requirements. Please refer [requirements.txt](https://github.com/Yj-Xiong/AnonymousRepo/blob/main/requirements.txt).
 4. Download and extract the [VoiceBank+DEMAND dataset](https://datashare.ed.ac.uk/handle/10283/1942). 
 
 ## Training
@@ -44,13 +44,14 @@ python inference_td.py --test_dir <dir to VCTK-DEMAND/test> --model_path <path t
 ## Model Architecture
 The overview of Td-SENet. <br><br>
 <img src="https://github.com/Yj-Xiong/AnonymousRepo/blob/main/models/TdSENet-Overview.png" width="600px">
+
 The details of the modules. <br><br>
 <img src="https://github.com/Yj-Xiong/AnonymousRepo/blob/main/models/Modules.png" width="600px">
 
 
 ## Visualization
 For Mandarin enhancement results with different denoising models, the spectral visualization uses D21_866.wav from THCHS-30 dataset.
-![visualization_zh-models](/Figures/Visualization/Enhanced-zh/D21_866.png)
+![visualization_zh-models](/data/Spectrograms.png)
 
 ## Acknowledgements
 We referred to [CMGAN](https://github.com/ruizhecao96/CMGAN/).
