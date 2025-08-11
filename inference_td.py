@@ -15,7 +15,11 @@ from rich.progress import track
 
 @torch.no_grad()
 def enhance_one_track(model, audio_path, saved_dir, cut_len, n_fft=400, hop=100, save_tracks=False,device='cuda:0'):
+    # 使用split方法分割字符串
+    device_type, device_index = device.split(':')
 
+    # 将device_index转换为整数
+    device_number = int(device_index)
     name = os.path.split(audio_path)[-1]
     noisy, sr = torchaudio.load(audio_path)
     assert sr == 16000
@@ -51,6 +55,7 @@ def enhance_one_track(model, audio_path, saved_dir, cut_len, n_fft=400, hop=100,
     if save_tracks:
         saved_path = os.path.join(saved_dir, name)
         sf.write(saved_path, est_audio, sr)
+    torch.cuda.set_device(device_number)
     torch.cuda.empty_cache()
     return est_audio, length
 
@@ -75,13 +80,7 @@ def enhanced1(model_path, noisy_dir, save_tracks, saved_dir,device='cuda:0'):
     num = len(audio_list)
     for audio in tqdm(audio_list, desc="Enhancement Processing"):
         noisy_path = os.path.join(noisy_dir, audio)
-        est_audio, length = enhance_one_track(model, noisy_path, saved_dir, 16000 *16, n_fft, n_fft // 4, save_tracks)
-        # # 显示当前进度百分比
-        # progress_percentage = (i + 1) / num * 100  # 计算百分比
-        # sys.stdout.write(f'\rEnhancement Processing {i + 1}/{num} ({progress_percentage:.2f}%): {audio}')
-        # sys.stdout.flush()  # 刷新输出
-
-    # print()  # 确保最后一行打印后换行
+        est_audio, length = enhance_one_track(model, noisy_path, saved_dir, 16000 *8, n_fft, n_fft // 4, save_tracks)
 
 
 def evaluation( noisy_dir, clean_dir,  saved_dir):
@@ -242,54 +241,31 @@ def noisy_evaluation(noisy_dir, clean_dir, saved_dir):
     print(f'sisdr: {metrics_avg[6]:.4f} ± {metrics_std[6]:.4f}')
     print(f'stoi: {metrics_avg[7]:.4f} ± {metrics_std[7]:.4f}')
 
-    # 保存结果
-    # result_file_path = os.path.join(saved_dir, 'metrics_avg.json')
-    # results = {
-    #     'pesq': metrics_avg[0],
-    #     'csig': metrics_avg[1],
-    #     'cbak': metrics_avg[2],
-    #     'covl': metrics_avg[3],
-    #     'ssnr': metrics_avg[4],
-    #     'sisnr': metrics_avg[5],
-    #     'sisdr': metrics_avg[6],
-    #     'stoi': metrics_avg[7]
-    # }
-
-    # 如果文件存在，加载已有数据并追加新结果
-    # if os.path.exists(result_file_path):
-    #     with open(result_file_path, 'r') as json_file:
-    #         all_results = json.load(json_file)
-    # else:
-    #     all_results = []
-
-    # 追加当前实验的结果
-    # all_results.append(results)
-
-    # 保存更新后的结果
-    # with open(result_file_path, 'w') as json_file:
-    #     json.dump(all_results, json_file, indent=4)
-
 parser = argparse.ArgumentParser()
-parser.add_argument("--model_path", type=str, default='/home/xyj/Experiment/CMG-v1/src/TdNet_Vb_100epochs/epoch45-pesq:3.581-loss_sum:0.5092:-g:0.505-d:0.003',
+parser.add_argument("--model_path", type=str, default='/home/xyj/Experiment/CMG-v1/src/ckpt/multi_Td-epoch53-pesq:3.141-loss_sum:0.5601:-g:0.558-d:0.002',
                     help="the path where the model is saved")
 
-parser.add_argument("--test_dir", type=str, default='/home/dataset/Voicebank/noisy-vctk-16k/',
-                    help="noisy tracks dir to be enhanced")
+# parser.add_argument("--test_dir", type=str, default='/home/dataset/Voicebank/noisy-vctk-16k/',
+#                     help="noisy tracks dir to be enhanced")
 # parser.add_argument("--model_path", type=str, default='/home/xyj/Experiment/CMG-v1/src/TdNet_VB0319/epoch16-pesq:3.543-loss_sum:0.5108:-g:0.506-d:0.004',
 #                     help="the path where the model is saved")
 #
-# parser.add_argument("--test_dir", type=str, default='/home/dataset/Voicebank/noisy-vctk-16k/',
-#                     help="noisy tracks dir to be enhanced")
+parser.add_argument("--test_dir", type=str, default='/home/xyj/datasets/uyghur/',
+                    help="noisy tracks dir to be enhanced")
+parser.add_argument("--clean_dir", type=str, default='/home/xyj/datasets/uyghur/',
+                    help="noisy tracks dir to be enhanced")
 parser.add_argument("--save_tracks", type=str, default=True, help="save predicted tracks or not")
-parser.add_argument("--save_dir", type=str, default='/home/xyj/Experiment/CMG-v1/Enh_audio-0410', help="where enhanced tracks to be saved")
+parser.add_argument("--save_dir", type=str, default='../Td_Multi-Enh_audio_U', help="where enhanced tracks to be saved")
 args = parser.parse_args()
 
 
 if __name__ == '__main__':
     if not os.path.exists(args.save_dir):
         os.mkdir(args.save_dir)
-    noisy_dir = os.path.join(args.test_dir, 'noisy_testset_wav_16k')
-    clean_dir = os.path.join(args.test_dir, 'clean_testset_wav_16k')
+    noisy_dir = os.path.join(args.test_dir, 'test_noisy')
+    clean_dir = os.path.join(args.clean_dir, 'test')
+    # noisy_dir = os.path.join(args.test_dir, 'noisy_testset_wav_16k')
+    # clean_dir = os.path.join(args.test_dir, 'clean_testset_wav_16k')
     # noisy_dir = args.test_dir
     # noisy_dir = '/home/xyj/datasets/chinese/test_noisy'
     #         noisy_dir = os.path.join(args.test_dir, noisy_dir)
