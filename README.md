@@ -49,9 +49,9 @@ The details of the modules. <br><br>
 <img src="https://github.com/Yj-Xiong/AnonymousRepo/blob/main/models/Modules.png" width="600px">
 
 
-## Visualization
+## Spectral Visualization
 For Mandarin enhancement results with different denoising models, the spectral visualization uses D21_866.wav from THCHS-30 dataset.
-![visualization_zh-models](/data/Spectrograms.png)
+<img src="https://github.com/Yj-Xiong/AnonymousRepo/blob/main/data/Spectrograms.png" width="600px">
 
 ## Acknowledgements
 We referred to [CMGAN](https://github.com/ruizhecao96/CMGAN/).
