@@ -10,8 +10,6 @@ Audio samples are from THCHS+DNS dataset (mixed with THCHS-30 dataset and DNS-Ch
 4. Download and extract the [VoiceBank+DEMAND dataset](https://datashare.ed.ac.uk/handle/10283/1942). 
 
 ## Training
-## How to train:
-
 ### Step 1:
 
 ```pip install -r requirements.txt```
