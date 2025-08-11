@@ -58,7 +58,7 @@ def enhanced1(model_path, noisy_dir, save_tracks, saved_dir,device='cuda:0'):
     torch.device(device)
     map_location = torch.device(device)
     n_fft = 400
-    # hubert_ckpt_path = "/home/xyj/Experience/hubert_large_ll60k.pt"
+    # hubert_ckpt_path = "/home/xyj/Experiment/hubert_large_ll60k.pt"
     # models, cfg, task = fairseq.checkpoint_utils.load_model_ensemble_and_task([hubert_ckpt_path])
     # hubert = models[0].to(device)
     model = generator.TSCNet(num_channel=64, num_features=n_fft//2+1).to(device)
@@ -280,9 +280,9 @@ def noisy_evaluation(noisy_dir, clean_dir, saved_dir):
 # # parser.add_argument("--save_tracks", type=str, default=True, help="save predicted tracks or not")
 # # parser.add_argument("--save_dir", type=str, default='/home/gcj/dataset/enhanced_baiqiang', help="where enhanced tracks to be saved")
 #
-# parser.add_argument("--model_path", type=str, default='/home/xyj/Experience/CMG-v1/src/best_ckpt/epoch67-pesq:3.261-loss_sum:0.5355:-g:0.533-d:0.001',
+# parser.add_argument("--model_path", type=str, default='/home/xyj/Experiment/CMG-v1/src/best_ckpt/epoch67-pesq:3.261-loss_sum:0.5355:-g:0.533-d:0.001',
 #                     help="the path where the model is saved")
-# # parser.add_argument("--model_path", type=str, default='/home/xyj/Experience/CMG-v1/src/ckpt_524-w|o_FFB/CMGAN_epoch_44_0.056_0.003',
+# # parser.add_argument("--model_path", type=str, default='/home/xyj/Experiment/CMG-v1/src/ckpt_524-w|o_FFB/CMGAN_epoch_44_0.056_0.003',
 # #                     help="the path where the model is saved")
 # # chinese :/home/wrl/new_torch/exp_result_audio/model/CMGAN-chinese/CMGAN_epoch_34_6.056
 # # chinese-multi: /home/wrl/new_torch/exp_result_audio/model/CMGAN-chinese-multi/CMGAN_epoch_85_8.081_0.002_2.013
@@ -311,7 +311,7 @@ def noisy_evaluation(noisy_dir, clean_dir, saved_dir):
 #     sisnr_evaluation( noisy_dir=noisy_dir, clean_dir = args.test_dir,
 #                saved_dir=args.save_dir)
 # parser = argparse.ArgumentParser()
-# parser.add_argument("--model_path", type=str, default='/home/xyj/Experience/CMG-v1/src/best_ckpt/ckpt-CMGAN_E',
+# parser.add_argument("--model_path", type=str, default='/home/xyj/Experiment/CMG-v1/src/best_ckpt/ckpt-CMGAN_E',
 #                     help="the path where the model is saved")
 #
 # parser.add_argument("--test_dir", type=str, default='/home/xyj/datasets/english/vb_babble/',
@@ -351,16 +351,16 @@ parser = argparse.ArgumentParser()
 # parser.add_argument("--save_tracks", type=str, default=True, help="save predicted tracks or not")
 # parser.add_argument("--save_dir", type=str, default='/home/gcj/dataset/enhanced_baiqiang', help="where enhanced tracks to be saved")
 
-parser.add_argument("--model_path", type=str, default='/home/xyj/Experience/CMG-v1/src/ckpt_cmgan_light/epoch49-pesq:3.351-loss_sum:0.0639:-g:0.059-d:0.004',
+parser.add_argument("--model_path", type=str, default='/home/xyj/Experiment/CMG-v1/src/ckpt_cmgan_light/epoch49-pesq:3.351-loss_sum:0.0639:-g:0.059-d:0.004',
                     help="the path where the model is saved")
-# parser.add_argument("--model_path", type=str, default='/home/xyj/Experience/CMG-v1/src/ckpt_524-w|o_FFB/CMGAN_epoch_44_0.056_0.003',
+# parser.add_argument("--model_path", type=str, default='/home/xyj/Experiment/CMG-v1/src/ckpt_524-w|o_FFB/CMGAN_epoch_44_0.056_0.003',
 #                     help="the path where the model is saved")
 # chinese :/home/wrl/new_torch/exp_result_audio/model/CMGAN-chinese/CMGAN_epoch_34_6.056
 # chinese-multi: /home/wrl/new_torch/exp_result_audio/model/CMGAN-chinese-multi/CMGAN_epoch_85_8.081_0.002_2.013
 parser.add_argument("--test_dir", type=str, default='/home/dataset/Voicebank/noisy-vctk-16k/',
                     help="noisy tracks dir to be enhanced")
 parser.add_argument("--save_tracks", type=str, default=True, help="save predicted tracks or not")
-parser.add_argument("--save_dir", type=str, default='/home/xyj/Experience/CMG-v1/Enh_audio-Md', help="where enhanced tracks to be saved")
+parser.add_argument("--save_dir", type=str, default='/home/xyj/Experiment/CMG-v1/Enh_audio-Md', help="where enhanced tracks to be saved")
 args = parser.parse_args()
 
 
