@@ -270,18 +270,18 @@ def noisy_evaluation(noisy_dir, clean_dir, saved_dir):
     #     json.dump(all_results, json_file, indent=4)
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--model_path", type=str, default='/home/xyj/Experience/CMG-v1/src/TdNet_Vb_100epochs/epoch45-pesq:3.581-loss_sum:0.5092:-g:0.505-d:0.003',
+parser.add_argument("--model_path", type=str, default='/home/xyj/Experiment/CMG-v1/src/TdNet_Vb_100epochs/epoch45-pesq:3.581-loss_sum:0.5092:-g:0.505-d:0.003',
                     help="the path where the model is saved")
 
 parser.add_argument("--test_dir", type=str, default='/home/dataset/Voicebank/noisy-vctk-16k/',
                     help="noisy tracks dir to be enhanced")
-# parser.add_argument("--model_path", type=str, default='/home/xyj/Experience/CMG-v1/src/TdNet_VB0319/epoch16-pesq:3.543-loss_sum:0.5108:-g:0.506-d:0.004',
+# parser.add_argument("--model_path", type=str, default='/home/xyj/Experiment/CMG-v1/src/TdNet_VB0319/epoch16-pesq:3.543-loss_sum:0.5108:-g:0.506-d:0.004',
 #                     help="the path where the model is saved")
 #
 # parser.add_argument("--test_dir", type=str, default='/home/dataset/Voicebank/noisy-vctk-16k/',
 #                     help="noisy tracks dir to be enhanced")
 parser.add_argument("--save_tracks", type=str, default=True, help="save predicted tracks or not")
-parser.add_argument("--save_dir", type=str, default='/home/xyj/Experience/CMG-v1/Enh_audio-0410', help="where enhanced tracks to be saved")
+parser.add_argument("--save_dir", type=str, default='/home/xyj/Experiment/CMG-v1/Enh_audio-0410', help="where enhanced tracks to be saved")
 args = parser.parse_args()
 
 
@@ -322,7 +322,7 @@ if __name__ == '__main__':
     #            saved_dir=output_dir)
 #
 # # parser = argparse.ArgumentParser()
-# # parser.add_argument("--model_path", type=str, default='/home/xyj/Experience/epoch66-pesq:3.331-loss_sum:0.5180:-g:0.516-d:0.001',
+# # parser.add_argument("--model_path", type=str, default='/home/xyj/Experiment/epoch66-pesq:3.331-loss_sum:0.5180:-g:0.516-d:0.001',
 # #                     help="the path where the model is saved")
 # #
 # parser.add_argument("--test_dir", type=str, default='/home/xyj/datasets/chinese/dev_noisy_db/',
