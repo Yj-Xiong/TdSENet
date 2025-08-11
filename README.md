@@ -50,8 +50,8 @@ The details of the modules. <br><br>
 
 
 ## Spectral Visualization
-For Mandarin enhancement results with different denoising models, the spectral visualization uses D21_866.wav from THCHS-30 dataset.
+For Mandarin enhancement results with different denoising models, the spectral visualization uses B7_278.wav from THCHS-30 dataset.
 <img src="https://github.com/Yj-Xiong/AnonymousRepo/blob/main/data/Spectrograms.png" width="600px">
-
+For more convincing, we visualize the spectrograms of the audio samples, where white boxes are added for the highlighted comparison. It can be observed that \textit{(i)} the spectra in (c) and (d) retain more residual noise or lose more original components in the lower frequency bands; \textit{(ii)} artificial sounds are introduced in (d). \textit{(iii)} Due to the inherently low spectral energy density in high-frequency bands, the high-frequency components in both (c) and (d) exhibit relatively sparse distributions. In contrast, Td-SENet demonstrates superior high-frequency harmonic retention, visually validating the efficacy of HfCB.
 ## Acknowledgements
 We referred to [CMGAN](https://github.com/ruizhecao96/CMGAN/).
