@@ -1,6 +1,6 @@
 # Toward Robust Speech Enhancement in Multilingual Environment (Submitted to ICASSP 2026)
 ### Yujie Xiong and Zhihua Huang
-Audio samples are from THCHS+DNS dataset (mixed with THCHS-30 dataset and DNS-Challenge dataset). All wav files are resampled to 16kHz in our experiments.
+Official PyTorch implementation of the proposed Td-SENet by Xiong et al. Audio samples are from THCHS+DNS dataset (mixed with THCHS-30 dataset and DNS-Challenge dataset). All wav files are resampled to 16kHz in our experiments.
 
  
 ## Pre-requisites
