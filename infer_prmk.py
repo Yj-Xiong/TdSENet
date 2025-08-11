@@ -308,7 +308,7 @@ def noisy_evaluation(noisy_dir, clean_dir, saved_dir):
     # with open(result_file_path, 'w') as json_file:
     #     json.dump(all_results, json_file, indent=4)
 parser = argparse.ArgumentParser()
-parser.add_argument("--model_path", type=str, default='/home/xyj/Experience/PrimeK-Net-main/VB_CKPT_test/g_00214000',
+parser.add_argument("--model_path", type=str, default='/home/xyj/Experiment/PrimeK-Net-main/VB_CKPT_test/g_best',
                     help="the path where the model is saved")
 
 parser.add_argument("--test_dir", type=str, default='/home/dataset/Voicebank/noisy-vctk-16k/',
@@ -318,43 +318,6 @@ parser.add_argument("--save_dir", type=str, default='../Enh_audio-primeknet-325'
 args = parser.parse_args()
 
 
-# if __name__ == '__main__':
-#     if not os.path.exists(args.save_dir):
-#         os.mkdir(args.save_dir)
-#
-#     # # 列出当前目录下的目录名称列表
-#     noisy_dir_list = [d for d in os.listdir(args.test_dir) if os.path.isdir(os.path.join(args.test_dir, d))]
-#
-#     for noisy_dir in noisy_dir_list:
-#         noisy_dir = os.path.join(args.test_dir, noisy_dir)
-#         output_dir = os.path.join(args.save_dir, os.path.split(noisy_dir)[-1])
-#
-#         if not os.path.exists(args.save_dir):
-#             os.mkdir(args.save_dir)
-#             os.mkdir(output_dir)
-#     # #增强算法1处理
-#         enhanced1(model_path = args.model_path, noisy_dir = noisy_dir,
-#                save_tracks = args.save_tracks, saved_dir = output_dir)
-#
-#     # #得到增强算法1的评价指标
-#         sisnr_evaluation( noisy_dir=noisy_dir, clean_dir = '/home/dataset/THCHS-30/data_thchs30/dev/',
-#                saved_dir=output_dir)
-# parser = argparse.ArgumentParser()
-
-
-# parser.add_argument("--model_path", type=str, default='/home/xyj/Experience/MP-SENet/cp_model_C/g_best_77epoch',
-#                     help="the path where the model is saved")
-# # parser.add_argument("--model_path", type=str, default='/home/xyj/Experience/CMG-v1/src/ckpt_524-w|o_FFB/CMGAN_epoch_44_0.056_0.003',
-# #                     help="the path where the model is saved")
-# # chinese :/home/wrl/new_torch/exp_result_audio/model/CMGAN-chinese/CMGAN_epoch_34_6.056
-# # chinese-multi: /home/wrl/new_torch/exp_result_audio/model/CMGAN-chinese-multi/CMGAN_epoch_85_8.081_0.002_2.013
-# parser.add_argument("--test_dir", type=str, default='/home/dataset/THCHS-30/data_thchs30/test',
-#                     help="noisy tracks dir to be enhanced")
-# parser.add_argument("--save_tracks", type=str, default=True, help="save predicted tracks or not")
-# parser.add_argument("--save_dir", type=str, default='../Enh_audio-Mp—C', help="where enhanced tracks to be saved")
-# args = parser.parse_args()
-#
-#
 if __name__ == '__main__':
 
 
