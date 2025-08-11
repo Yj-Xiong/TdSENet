@@ -41,7 +41,7 @@ python inference_td.py --test_dir <dir to VCTK-DEMAND/test> --model_path <path t
 
 ## Model Architecture
 The overview of Td-SENet. <br><br>
-<img src="https://github.com/Yj-Xiong/TdSENet/blob/main/models/TdSENet-Overview.png" width="600px">
+<img src="https://github.com/Yj-Xiong/TdSENet/blob/main/models/TdSENet-Overview.png" width="1200x">
 
 The details of the modules. <br><br>
 <img src="https://github.com/Yj-Xiong/TdSENet/blob/main/models/Modules.png" width="600px">
@@ -49,7 +49,7 @@ The details of the modules. <br><br>
 
 ## Spectral Visualization
 For Mandarin enhancement results with different denoising models, the spectral visualization uses B7_278.wav from THCHS-30 dataset.
-<img src="https://github.com/Yj-Xiong/TdSENet/blob/main/data/Spectrograms.png" width="1600px">
+<img src="https://github.com/Yj-Xiong/TdSENet/blob/main/data/Spectrograms.png" width="1800px">
 
 For more convincing, we visualize the spectrograms of the audio samples, where white boxes are added for the highlighted comparison. It can be observed that:
 
