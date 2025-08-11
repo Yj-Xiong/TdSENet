@@ -9,7 +9,7 @@ Audio samples are from THCHS+DNS dataset (mixed with THCHS-30 dataset and DNS-Ch
 3. Install python requirements. Please refer [requirements.txt](https://github.com/Yj-Xiong/AnonymousRepo/blob/main/requirements.txt).
 4. Download and extract the [VoiceBank+DEMAND dataset](https://datashare.ed.ac.uk/handle/10283/1942). 
 
-## Training
+## Training and Inference
 ### Step 1:
 
 ```pip install -r requirements.txt```
@@ -30,11 +30,11 @@ Or catalog other datasets following the above folder branches.
 ### Step 3:
 If you want to train the model, run train.py
 ```
-python train.py --data_dir <dir to VCTK-DEMAND dataset or your own dataset>
+python train_td.py --data_dir <dir to VCTK-DEMAND dataset or your own dataset>
 ```
 
 ### Step 4:
-Evaluation with the best ckpt:
+Inference with the best ckpt for evaluation:
 ```
 python inference_td.py --test_dir <dir to VCTK-DEMAND/test> --model_path <path to the best ckpt>
 ```
