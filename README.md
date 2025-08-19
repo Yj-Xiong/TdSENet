@@ -44,7 +44,7 @@ The overview of Td-SENet. <br><br>
 <img src="https://github.com/Yj-Xiong/TdSENet/blob/main/models/TdSENet-Overview.png" width="1200x">
 
 The details of the modules. <br><br>
-<img src="https://github.com/Yj-Xiong/TdSENet/blob/main/models/Module.png" width="600px">
+<img src="https://github.com/Yj-Xiong/TdSENet/blob/main/models/module.png" width="600px">
 
 
 ## Spectral Visualization
