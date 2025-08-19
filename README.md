@@ -28,7 +28,7 @@ Download VCTK-DEMAND dataset with 16 kHz, change the dataset dir:
 Or catalog other datasets following the above folder branches.
 
 ### Step 3:
-If you want to train the model, run train.py
+If you want to train the model, run [train.py](https://github.com/Yj-Xiong/TdSENet/blob/main/train.py):
 ```
 python train_td.py --data_dir <dir to VCTK-DEMAND dataset or your own dataset>
 ```
