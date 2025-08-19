@@ -41,7 +41,7 @@ python inference_td.py --test_dir <dir to VCTK-DEMAND/test> --model_path <path t
 
 ## Model Architecture
 The overview of Td-SENet. <br><br>
-<img src="https://github.com/Yj-Xiong/TdSENet/blob/main/models/Overview.png" width="1200x">
+<img src="https://github.com/Yj-Xiong/TdSENet/blob/main/models/Td_Overview.png" width="1200x">
 
 The details of the modules. <br><br>
 <img src="https://github.com/Yj-Xiong/TdSENet/blob/main/models/Fig_module.png" width="600px">
