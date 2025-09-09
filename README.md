@@ -49,7 +49,7 @@ The details of the modules. <br><br>
 ## Low SNR Mandarin Denoising
 Further assessment for well-trained Mandarin models under low SNR and adverse conditions (400 unseen noises from DNS-challenge dataset and challenging babble noise).
 <img src="https://github.com/Yj-Xiong/TdSENet/blob/main/data/SNR_Comparison.png" width="1800px">
-Similarly, Td-SENet maintains overall superiority over the SOTA models in each case.
+Clearly, Td-SENet maintains overall superiority over the SOTA models in each case.
 ## Spectral Visualization
 For Mandarin enhancement results with different denoising models, the spectral visualization uses B7_278.wav from THCHS-30 dataset.
 <img src="https://github.com/Yj-Xiong/TdSENet/blob/main/data/Spectrograms.png" width="1800px">
