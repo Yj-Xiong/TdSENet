@@ -357,8 +357,8 @@ class MaskDecoder(nn.Module):
         self.norm = nn.InstanceNorm2d(out_channel, affine=True)
         self.prelu = nn.PReLU(out_channel)
         self.final_conv = nn.Conv2d(out_channel, out_channel, (1, 1))
-        # self.prelu_out = LearnableSigmoid_2d(num_features)
-        self.prelu_out = nn.PReLU(num_features, init=-0.25)
+        self.prelu_out = LearnableSigmoid_2d(num_features)
+        #self.prelu_out = nn.PReLU(num_features, init=-0.25)
 
     def forward(self, x):
         # x = self.kan_conv(x)
