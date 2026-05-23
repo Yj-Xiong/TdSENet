@@ -6,6 +6,10 @@ Official PyTorch implementation of the paper *"Improving Local Features and High
 
 ### Yujie Xiong and Zhihua Huang
 
+## Cross-lingual Speech Enhancement
+An example of cross-lingual speech enhancement, where Td-SENet effectively handles multiple languages in challenging acoustic environments.
+<img src="figs/Fig1_cross_lingual_example.png" width="1200px">
+
 ## Pre-requisites
 1. Python >= 3.9.
 2. Clone this repository.
@@ -57,9 +61,6 @@ python inference_td.py --test_dir <dir to VCTK-DEMAND/test> --model_path <path t
 <img src="figs/Fig5_HfCB.png" width="1200px">
 
 
-## Cross-lingual Speech Enhancement
-An example of cross-lingual speech enhancement, where Td-SENet effectively handles multiple languages in challenging acoustic environments.
-<img src="figs/Fig1_cross_lingual_example.png" width="1200px">
 
 ## Low SNR Mandarin Denoising
 Further assessment for well-trained Mandarin models under low SNR and adverse conditions (400 unseen noises from DNS-challenge dataset and challenging babble noise).
