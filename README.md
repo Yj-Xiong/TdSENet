@@ -45,19 +45,19 @@ python inference_td.py --test_dir <dir to VCTK-DEMAND/test> --model_path <path t
 ## Model Architecture
 
 ### Overview of Td-SENet
-<img src="models/Td_Overview.png" width="1200px">
+<img src="figs/TdSENet_Overview.png" width="1200px">
 
 ### Time-Frequency LocConformer (TF-LocConformer)
-<img src="models/Fig3_TF_LocConformer.png" width="1200px">
+<img src="figs/Fig3_TF_LocConformer.png" width="1200px">
 
 ### Convolution SwiGLU (ConvSwiGLU) Module
-<img src="models/Fig4_ConvSwiGLU.png" width="500px">
+<img src="figs/Fig4_ConvSwiGLU.png" width="500px">
 
 ### High-frequency Channel Block (HfCB)
-<img src="models/Fig5_HfCB.png" width="1200px">
+<img src="figs/Fig5_HfCB.png" width="1200px">
 
 ### Overall Module Details
-<img src="models/Fig_module.png" width="600px">
+<img src="figs/Fig_module.png" width="600px">
 
 ## Cross-lingual Speech Enhancement
 An example of cross-lingual speech enhancement, where Td-SENet effectively handles multiple languages in challenging acoustic environments.
@@ -70,7 +70,7 @@ Clearly, Td-SENet maintains overall superiority over the SOTA models in each cas
 
 ## Spectral Visualization
 For Mandarin enhancement results with different denoising models, the spectral visualization uses B7_278.wav from THCHS-30 dataset.
-<img src="data/Spectrograms.png" width="1800px">
+<img src="figs/Fig6_Spectrograms.png" width="1800px">
 
 For more convincing, we visualize the spectrograms of the audio samples, where white boxes are added for the highlighted comparison. It can be observed that:
 
