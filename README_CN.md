@@ -4,7 +4,7 @@
 
 论文 *"Improving Local Features and High-frequency Information for Cross-lingual and Low-SNR Speech Enhancement"* 的官方 PyTorch 实现。音频样本来自 THCHS+DNS 数据集（混合 THCHS-30 数据集与 DNS-Challenge 数据集）。所有实验中的 wav 文件均已重采样至 16kHz。
 
-### 熊雨杰，黄志华
+### 作者：Yujie Xiong, Zhihua Huang
 
 ## 跨语言语音增强
 跨语言语音增强示例，Td-SENet 在多种语言的复杂声学环境中均能实现有效增强。
