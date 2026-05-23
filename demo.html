@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Td-SENet Speech Enhancement Demo</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: #f5f7fa;
+    color: #2c3e50;
+    line-height: 1.6;
+  }
+  .header {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    color: #fff;
+    padding: 48px 24px;
+    text-align: center;
+  }
+  .header h1 { font-size: 2.2em; margin-bottom: 8px; }
+  .header p { font-size: 1.1em; opacity: 0.85; max-width: 700px; margin: 0 auto; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 32px 20px; }
+
+  .sample-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    margin-bottom: 28px;
+    padding: 28px 32px;
+  }
+  .sample-title {
+    font-size: 1.3em;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-bottom: 4px;
+  }
+  .sample-info {
+    font-size: 0.9em;
+    color: #7f8c8d;
+    margin-bottom: 20px;
+  }
+  .audio-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 8px;
+  }
+  .audio-item {
+    flex: 1;
+    min-width: 180px;
+    background: #f8fafc;
+    border: 1px solid #e8ecf1;
+    border-radius: 10px;
+    padding: 14px 16px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .audio-item:hover {
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52,152,219,0.1);
+  }
+  .audio-item.clean { border-left: 4px solid #27ae60; }
+  .audio-item.noisy { border-left: 4px solid #e74c3c; }
+  .audio-item.model { border-left: 4px solid #3498db; }
+  .audio-item.ours  { border-left: 4px solid #8e44ad; }
+
+  .audio-label {
+    font-size: 0.75em;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+  .audio-item.clean .audio-label { color: #27ae60; }
+  .audio-item.noisy .audio-label { color: #e74c3c; }
+  .audio-item.model .audio-label { color: #3498db; }
+  .audio-item.ours  .audio-label { color: #8e44ad; }
+
+  .audio-name {
+    font-size: 0.85em;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #555;
+  }
+  audio {
+    width: 100%;
+    height: 36px;
+    border-radius: 6px;
+  }
+  audio::-webkit-media-controls-panel {
+    background: #eef2f7;
+  }
+  .footer {
+    text-align: center;
+    padding: 32px;
+    color: #95a5a6;
+    font-size: 0.9em;
+    border-top: 1px solid #e8ecf1;
+    margin-top: 24px;
+  }
+  .footer a { color: #3498db; text-decoration: none; }
+  .footer a:hover { text-decoration: underline; }
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 28px;
+    justify-content: center;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85em;
+    color: #666;
+  }
+  .legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+  }
+  .legend-dot.clean { background: #27ae60; }
+  .legend-dot.noisy { background: #e74c3c; }
+  .legend-dot.cmgan { background: #3498db; }
+  .legend-dot.primek { background: #f39c12; }
+  .legend-dot.tdsenet { background: #8e44ad; }
+
+  @media (max-width: 640px) {
+    .header h1 { font-size: 1.5em; }
+    .audio-group { flex-direction: column; }
+    .sample-card { padding: 20px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Td-SENet Speech Enhancement Demo</h1>
+  <p>Comparison of speech enhancement results across different models on Mandarin speech samples under low-SNR conditions (-9 dB).</p>
+</div>
+
+<div class="container">
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot clean"></div> Clean (Reference)</div>
+    <div class="legend-item"><div class="legend-dot noisy"></div> Noisy (-9 dB)</div>
+    <div class="legend-item"><div class="legend-dot cmgan"></div> CMGAN</div>
+    <div class="legend-item"><div class="legend-dot primek"></div> PrimeK-Net</div>
+    <div class="legend-item"><div class="legend-dot tdsenet"></div> Td-SENet (Ours)</div>
+  </div>
+
+  <div class="sample-card">
+    <div class="sample-title">Sample 1: A4_204</div>
+    <div class="sample-info">Mandarin female speech &middot; SNR: -9 dB &middot; THCHS-30 dataset</div>
+    <div class="audio-group">
+      <div class="audio-item clean">
+        <div class="audio-label">Reference</div>
+        <div class="audio-name">Clean Speech</div>
+        <audio controls preload="none"><source src="A4_204/A4_204 clean.wav" type="audio/wav"></audio>
+      </div>
+      <div class="audio-item noisy">
+        <div class="audio-label">Input</div>
+        <div class="audio-name">Noisy (-9 dB)</div>
+        <audio controls preload="none"><source src="A4_204/A4_204_-9dB.wav" type="audio/wav"></audio>
+      </div>
+      <div class="audio-item model">
+        <div class="audio-label">Baseline</div>
+        <div class="audio-name">CMGAN</div>
+        <audio controls preload="none"><source src="A4_204/A4_204 cmgan.wav" type="audio/wav"></audio>
+      </div>
+      <div class="audio-item model">
+        <div class="audio-label">SOTA</div>
+        <div class="audio-name">PrimeK-Net</div>
+        <audio controls preload="none"><source src="A4_204/A4_204 primek.wav" type="audio/wav"></audio>
+      </div>
+      <div class="audio-item ours">
+        <div class="audio-label">Ours</div>
+        <div class="audio-name">Td-SENet</div>
+        <audio controls preload="none"><source src="A4_204/A4_204 tdnet.wav" type="audio/wav"></audio>
+      </div>
+    </div>
+  </div>
+
+  <div class="sample-card">
+    <div class="sample-title">Sample 2: B7_278</div>
+    <div class="sample-info">Mandarin male speech &middot; SNR: -9 dB &middot; THCHS-30 dataset</div>
+    <div class="audio-group">
+      <div class="audio-item clean">
+        <div class="audio-label">Reference</div>
+        <div class="audio-name">Clean Speech</div>
+        <audio controls preload="none"><source src="B7_278/B7_278 clean.wav" type="audio/wav"></audio>
+      </div>
+      <div class="audio-item noisy">
+        <div class="audio-label">Input</div>
+        <div class="audio-name">Noisy (-9 dB)</div>
+        <audio controls preload="none"><source src="B7_278/B7_278_-9dB.wav" type="audio/wav"></audio>
+      </div>
+      <div class="audio-item model">
+        <div class="audio-label">Baseline</div>
+        <div class="audio-name">CMGAN</div>
+        <audio controls preload="none"><source src="B7_278/B7_278 cmgan.wav" type="audio/wav"></audio>
+      </div>
+      <div class="audio-item model">
+        <div class="audio-label">SOTA</div>
+        <div class="audio-name">PrimeK-Net</div>
+        <audio controls preload="none"><source src="B7_278/B7_278 primek.wav" type="audio/wav"></audio>
+      </div>
+      <div class="audio-item ours">
+        <div class="audio-label">Ours</div>
+        <div class="audio-name">Td-SENet</div>
+        <audio controls preload="none"><source src="B7_278/B7_278 tdnet.wav" type="audio/wav"></audio>
+      </div>
+    </div>
+  </div>
+
+  <div class="sample-card">
+    <div class="sample-title">Sample 3: C3_628</div>
+    <div class="sample-info">Mandarin speech &middot; SNR: -9 dB &middot; THCHS-30 dataset</div>
+    <div class="audio-group">
+      <div class="audio-item clean">
+        <div class="audio-label">Reference</div>
+        <div class="audio-name">Clean Speech</div>
+        <audio controls preload="none"><source src="C3_628/C23_628 clean.wav" type="audio/wav"></audio>
+      </div>
+      <div class="audio-item noisy">
+        <div class="audio-label">Input</div>
+        <div class="audio-name">Noisy (-9 dB)</div>
+        <audio controls preload="none"><source src="C3_628/C23_628_-9dB.wav" type="audio/wav"></audio>
+      </div>
+      <div class="audio-item model">
+        <div class="audio-label">Baseline</div>
+        <div class="audio-name">CMGAN</div>
+        <audio controls preload="none"><source src="C3_628/C23_628 cmgan.wav" type="audio/wav"></audio>
+      </div>
+      <div class="audio-item model">
+        <div class="audio-label">SOTA</div>
+        <div class="audio-name">PrimeK-Net</div>
+        <audio controls preload="none"><source src="C3_628/C23_628 primek.wav" type="audio/wav"></audio>
+      </div>
+      <div class="audio-item ours">
+        <div class="audio-label">Ours</div>
+        <div class="audio-name">Td-SENet</div>
+        <audio controls preload="none"><source src="C3_628/C23_628 tdnet.wav" type="audio/wav"></audio>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <p>Td-SENet: Triple-decoder Speech Enhancement Network &mdash; <a href="https://github.com/Yj-Xiong/TdSENet">GitHub Repository</a></p>
+</div>
+
+</body>
+</html>
