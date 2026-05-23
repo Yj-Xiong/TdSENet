@@ -45,7 +45,7 @@ python inference_td.py --test_dir <dir to VCTK-DEMAND/test> --model_path <path t
 ## Model Architecture
 
 ### Overview of Td-SENet
-<img src="figs/TdSENet_Overview.png" width="1200px">
+<img src="figs/Fig2_TdSENet_overview" width="1200px">
 
 ### Time-Frequency LocConformer (TF-LocConformer)
 <img src="figs/Fig3_TF_LocConformer.png" width="1200px">
@@ -56,8 +56,6 @@ python inference_td.py --test_dir <dir to VCTK-DEMAND/test> --model_path <path t
 ### High-frequency Channel Block (HfCB)
 <img src="figs/Fig5_HfCB.png" width="1200px">
 
-### Overall Module Details
-<img src="figs/Fig_module.png" width="600px">
 
 ## Cross-lingual Speech Enhancement
 An example of cross-lingual speech enhancement, where Td-SENet effectively handles multiple languages in challenging acoustic environments.
