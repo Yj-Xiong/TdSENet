@@ -1,4 +1,4 @@
-# Toward Robust Speech Enhancement in Multilingual Environment (Submitted to ICASSP 2026)
+# Toward Robust Speech Enhancement in Multilingual Environment
 
 Official PyTorch implementation of the paper. Audio samples are from THCHS+DNS dataset (mixed with THCHS-30 dataset and DNS-Challenge dataset). All wav files are resampled to 16kHz in our experiments.
 
