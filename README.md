@@ -45,7 +45,7 @@ python inference_td.py --test_dir <dir to VCTK-DEMAND/test> --model_path <path t
 ## Model Architecture
 
 ### Overview of Td-SENet
-<img src="figs/Fig2_TdSENet_overview" width="1200px">
+<img src="figs/Fig2_TdSENet_overview.png" width="1200px">
 
 ### Time-Frequency LocConformer (TF-LocConformer)
 <img src="figs/Fig3_TF_LocConformer.png" width="1200px">
