@@ -82,7 +82,7 @@ For more convincing, we visualize the spectrograms of the audio samples, where w
 In contrast, Td-SENet demonstrates superior high-frequency harmonic retention, visually validating the efficacy of HfCB.
 
 ## Audio Demo
-Listen to our speech enhancement demos: [Demo Page](https://yj-xiong.github.io/TdSENet/demo.html)
+Listen to our speech enhancement demos: [Demo Page](https://yj-xiong.github.io/TdSENet/index.html)
 
 ## Acknowledgements
 We referred to [CMGAN](https://github.com/ruizhecao96/CMGAN/).
